@@ -1,3 +1,4 @@
+ HEAD
 # CaaCviaGithubActions Lab
 Conditional Access as Code with Terraform and GitHub Actions
 This project demonstrates how to implement Conditional Access Policies as Code using:
@@ -179,3 +180,7 @@ Check Azure Portal → Azure AD → Security → Conditional Access → Policies
 Hira Jabeen
 Cloud | Security | DevOps Engineer
 LinkedIn | GitHub
+=======
+# conditional-access
+Conditional access policy deployment via GitHub actions and automating infrastructure with terraform
+>>>>>>> 90de87058cf2bb479a311aef9bfa4db7af1f59dc
