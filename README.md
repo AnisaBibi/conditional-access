@@ -41,7 +41,7 @@ GitHub Actions	Automate the CI/CD workflow
 
 🔐Prerequisites
 »»» Azure AD App Registration with the following:
-»»» API permissions: Policy.ReadWrite.ConditionalAccess
+»»» API permissions: Policy.ReadWrite.ConditionalAccess, dirctory.read.all, policy.read.conditionalaccess
 »»» A client secret (store the value, not the ID)
 
 »»» Assign Required Directory Role:
