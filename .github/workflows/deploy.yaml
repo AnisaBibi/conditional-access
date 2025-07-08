@@ -22,8 +22,24 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Terraform Plan
-      run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
+ - name: Terraform Plan
+      run: |
+        terraform plan \
+          -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
+          -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
+          -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
+      run: |
+        terraform apply -auto-approve \
+          -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
+          -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
+          -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
