@@ -1,12 +1,9 @@
- HEAD
-# CaaCviaGithubActions Lab
+ # CaaCviaGithubActions Lab
 Conditional Access as Code with Terraform and GitHub Actions
 This project demonstrates how to implement Conditional Access Policies as Code using:
 
 Terraform
-
 Azure Active Directory (Microsoft Entra)
-
 GitHub Actions for CI/CD
 
 The goal is to automate the deployment of Conditional Access policies in a secure, repeatable, and auditable way using Infrastructure as Code (IaC).
@@ -14,17 +11,12 @@ The goal is to automate the deployment of Conditional Access policies in a secur
 🚀 Use Case: Block Non-Compliant Devices from Untrusted Locations
 This use case creates a Conditional Access policy that:
 
-Applies to all users, excluding guests and external users.
-
-Applies when sign-in risk is medium or high.
-
-Blocks access from devices not compliant with organizational policy.
-
-Excludes access from trusted locations.
-
-Requires Multi-Factor Authentication (MFA).
-
-Includes session control configurations.
+»»» Applies to all users, excluding guests and external users.
+»»» Applies when sign-in risk is medium or high.
+»»» Blocks access from devices not compliant with organizational policy.
+»»» Excludes access from trusted locations.
+»»» Requires Multi-Factor Authentication (MFA).
+»»» Includes session control configurations.
 
 🔧 Tech Stack
 Tool	Purpose
@@ -48,31 +40,24 @@ GitHub Actions	Automate the CI/CD workflow
 
 
 🔐Prerequisites
-Azure AD App Registration with the following:
+»»» Azure AD App Registration with the following:
+»»» API permissions: Policy.ReadWrite.ConditionalAccess
+»»» A client secret (store the value, not the ID)
 
-API permissions: Policy.ReadWrite.ConditionalAccess
-
-A client secret (store the value, not the ID)
-
-Assign Required Directory Role:
-
-At least Security Administrator or Conditional Access Administrator
+»»» Assign Required Directory Role:
+»»» At least Security Administrator or Conditional Access Administrator
 
 Create GitHub Secrets:
-
 Secret Name	Description
-ARM_CLIENT_ID	App (client) ID
-ARM_CLIENT_SECRET	Client secret value (not ID!)
-ARM_TENANT_ID	Tenant (directory) ID
+ARM_CLIENT_ID	: App (client) ID
+ARM_CLIENT_SECRET :	Client secret value (not ID!)
+ARM_TENANT_ID	: Tenant (directory) ID
 
 ⚙️ How It Works
 GitHub Actions triggers on:
-
-Push to main
-
-Manual workflow_dispatch
-
-Terraform authenticates using secrets from GitHub
+»»» Push to main
+»»» Manual workflow_dispatch
+»»» Terraform authenticates using secrets from GitHub
 
 A Conditional Access Policy is created or updated based on main.tf
 
@@ -80,7 +65,7 @@ A Conditional Access Policy is created or updated based on main.tf
 hcl
 Copy
 Edit
-resource "azuread_conditional_access_policy" "block_untrusted_access" {
+##### resource "azuread_conditional_access_policy" "block_untrusted_access" {
   display_name = "Block Non-Compliant Devices from Untrusted Locations"
   state        = "enabled"
 
@@ -127,12 +112,13 @@ resource "azuread_conditional_access_policy" "block_untrusted_access" {
     cloud_app_security_policy                 = "monitorOnly"
     disable_resilience_defaults               = false
   }
-}
+} #####
+
 🔄 GitHub Actions Workflow (.github/workflows/deploy.yml)
 yaml
-Copy
-Edit
-name: Deploy Conditional Access Policy
+Copy & Edit
+
+##### name: Deploy Conditional Access Policy
 
 on:
   push:
@@ -169,18 +155,12 @@ jobs:
           -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
           -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
           -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
+          
 🧪 Testing the Setup
-Push a change to main
+»»» Push a change to main
+»»» Or manually trigger from GitHub Actions → "Deploy Conditional Access Policy"
+»»» Check Azure Portal → Azure AD → Security → Conditional Access → Policies
 
-Or manually trigger from GitHub Actions → "Deploy Conditional Access Policy"
-
-Check Azure Portal → Azure AD → Security → Conditional Access → Policies
-
-🙋‍♀️ Maintainer
-Hira Jabeen
-Cloud | Security | DevOps Engineer
-LinkedIn | GitHub
-=======
 # conditional-access
 Conditional access policy deployment via GitHub actions and automating infrastructure with terraform
 >>>>>>> 90de87058cf2bb479a311aef9bfa4db7af1f59dc
