@@ -1,5 +1,4 @@
-name: Deploy Conditional Access Policy
-
+name: deploy conditional access policy
 on:
   push:
     branches:
@@ -28,10 +27,6 @@ jobs:
           -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
           -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
           -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
     - name: Terraform Apply
       run: |
@@ -39,7 +34,4 @@ jobs:
           -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
           -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
           -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          
