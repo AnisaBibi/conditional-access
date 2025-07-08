@@ -10,8 +10,7 @@ resource "azuread_conditional_access_policy" "block_untrusted_access" {
 
     sign_in_risk_levels = ["medium", "high"]
     user_risk_levels    = ["medium"]
-
-    client_app_types = ["browser", "mobileAppsAndDesktopClients"]
+    client_app_types    = ["browser", "mobileAppsAndDesktopClients"]
 
     applications {
       included_applications = ["All"]
@@ -20,13 +19,13 @@ resource "azuread_conditional_access_policy" "block_untrusted_access" {
     devices {
       filter {
         mode = "exclude"
-        rule = "device.operatingSystem -eq \"Windows 7\"" # <- fix: Graph filter syntax
+        rule = "device.operatingSystem eq \"Windows 7\""
       }
     }
 
     locations {
       included_locations = ["All"]
-      excluded_locations = ["13936a93-d6a4-47c8-b257-ef109483a433"] # Must match Named Location ID
+      excluded_locations = ["AllTrusted"]
     }
 
     platforms {
@@ -38,6 +37,15 @@ resource "azuread_conditional_access_policy" "block_untrusted_access" {
     operator          = "OR"
     built_in_controls = ["mfa"]
   }
+
+  session_controls {
+    application_enforced_restrictions_enabled = true
+    sign_in_frequency                         = 10
+    sign_in_frequency_period                  = "hours"
+    cloud_app_security_policy                 = "monitorOnly"
+    disable_resilience_defaults               = false
+  }
+}
 
   session_controls {
     application_enforced_restrictions_enabled = true
