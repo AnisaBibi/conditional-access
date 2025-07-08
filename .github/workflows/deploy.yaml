@@ -22,7 +22,7 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
- - name: Terraform Plan
+    - name: Terraform Plan
       run: |
         terraform plan \
           -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
