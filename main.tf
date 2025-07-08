@@ -46,13 +46,3 @@ resource "azuread_conditional_access_policy" "block_untrusted_access" {
     disable_resilience_defaults               = false
   }
 }
-
-  session_controls {
-    application_enforced_restrictions_enabled = true
-    sign_in_frequency                         = 10
-    sign_in_frequency_period                  = "hours"
-    cloud_app_security_policy                 = "monitorOnly"
-    disable_resilience_defaults               = false
-  }
-}
-
